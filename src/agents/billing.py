@@ -1,10 +1,11 @@
 from google.adk.agents.llm_agent import Agent
 from src.agents.cards import BILLING_CARD
+from src.tools.mcp_server import get_billing_details
 
 def create_billing_agent():
     """
     Creates a specialized Billing Agent using the BILLING_CARD metadata.
-    Handles invoices, payments, and disputes.
+    Handles invoices, payments, and disputes using the get_billing_details MCP tool.
     """
     billing_agent = Agent(
         name=BILLING_CARD.name,
@@ -16,7 +17,6 @@ def create_billing_agent():
             "Use the 'get_billing_details' tool when a customer provides their ID (e.g., CUST-001). "
             "Be professional, empathetic, and clear about billing cycles and dispute processes."
         ),
-        # In a full ADK setup, tools would be registered here
-        # tools=["get_billing_details"]
+        tools=[get_billing_details]
     )
     return billing_agent

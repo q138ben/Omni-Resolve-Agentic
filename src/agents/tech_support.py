@@ -1,10 +1,11 @@
 from google.adk.agents.llm_agent import Agent
 from src.agents.cards import TECH_SUPPORT_CARD
+from src.tools.mcp_server import check_network_outage, search_knowledge_base
 
 def create_tech_support_agent():
     """
     Creates a specialized Technical Support Agent using the TECH_SUPPORT_CARD metadata.
-    Handles network, signal, and troubleshooting issues.
+    Handles network, signal, and troubleshooting issues using MCP tools.
     """
     tech_agent = Agent(
         name=TECH_SUPPORT_CARD.name,
@@ -17,6 +18,6 @@ def create_tech_support_agent():
             "Use 'search_knowledge_base' to find troubleshooting steps from the telecom dataset. "
             "Provide step-by-step guidance and maintain a helpful, technical tone."
         ),
-        # Tools: ["check_network_outage", "search_knowledge_base"]
+        tools=[check_network_outage, search_knowledge_base]
     )
     return tech_agent
