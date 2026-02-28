@@ -36,11 +36,10 @@ async def chat_endpoint(request: QueryRequest):
         safe_query = mask_pii(request.query)
         
         # Step 2: ADK Brain Orchestration
-        # In a real environment, this would call brain.run() to process the request
-        # We simulate the processing for this prototype
-        response = brain.run(safe_query)
+        # This now triggers the real multi-agent engine in src/agents/orchestrator.py
+        response_text = brain.run(safe_query)
         
-        return {"response": f"Brain processed your request: {safe_query}"}
+        return {"response": response_text}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
