@@ -16,7 +16,7 @@ class AgentCard(BaseModel):
 # Define cards for the Omni-Resolve-Agentic system
 
 ROUTER_CARD = AgentCard(
-    agent_id="omni-router",
+    agent_id="omni_router",
     name="OmniRouter",
     domain="Orchestration",
     description="The primary entry point that classifies and routes requests to specialized agents.",
@@ -26,7 +26,7 @@ ROUTER_CARD = AgentCard(
 )
 
 BILLING_CARD = AgentCard(
-    agent_id="billing-expert",
+    agent_id="billing_expert",
     name="BillingExpert",
     domain="Finance",
     description="Handles all inquiries related to invoices, payments, balances, and disputes.",
@@ -36,7 +36,7 @@ BILLING_CARD = AgentCard(
 )
 
 TECH_SUPPORT_CARD = AgentCard(
-    agent_id="tech-support-expert",
+    agent_id="tech_support_expert",
     name="TechSupportExpert",
     domain="Technical Support",
     description="Resolves issues related to network connectivity, signal coverage, and hardware.",
