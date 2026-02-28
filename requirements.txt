@@ -1,0 +1,11 @@
+# Core Agent Framework
+google-adk
+
+# Model Context Protocol
+mcp[cli]
+
+# Utilities
+python-dotenv
+pydantic
+fastapi
+uvicorn
