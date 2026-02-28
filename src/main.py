@@ -1,26 +1,31 @@
-from src.agents.router import create_router_agent
+from src.agents.orchestrator import create_adk_brain
 from src.utils.gdpr import mask_pii
 
 def main():
     """
-    Main entry point for the Omni-Resolve-Agentic system.
+    Main entry point for the Omni-Resolve-Agentic system using the ADK Brain.
     """
-    # Initialize the router agent
-    router = create_router_agent()
+    # Initialize the ADK Brain (Core Orchestrator)
+    brain = create_adk_brain()
     
-    # Placeholder for the main loop or entry for an inquiry
-    print("Omni-Resolve-Agentic initialized. Starting service...")
+    # Initialize the system message
+    print("Omni-Resolve-Agentic initialized. ADK Brain is active.")
     
-    # Mocking a user input
-    user_input = "Hello, I have a billing issue with my account (john.doe@example.com)."
+    # Simulate multiple customer inquiries
+    test_queries = [
+        "I need help with my billing dispute for account CUST-002 (john.doe@example.com).",
+        "My internet is very slow in ZIP 90210, can you check for outages?"
+    ]
     
-    # GDPR-compliant masking
-    safe_input = mask_pii(user_input)
-    print(f"Masked user input: {safe_input}")
-    
-    # Placeholder for routing and tool execution
-    # In a real scenario, this would use the ADK orchestration engine.
-    print(f"OmniRouter is processing the inquiry: {safe_input}")
+    for query in test_queries:
+        # Step 1: GDPR PII Masking
+        safe_query = mask_pii(query)
+        print(f"\n[Incoming Inquiry]: {safe_query}")
+        
+        # Step 2: ADK Brain Orchestration
+        # In a real environment, this would call brain.run() to process the request
+        response = brain.run(safe_query)
+        print(f"[Brain Response]: {response}")
 
 if __name__ == "__main__":
     main()
