@@ -9,3 +9,5 @@ python-dotenv
 pydantic
 fastapi
 uvicorn
+huggingface_hub
+pandas
