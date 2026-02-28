@@ -1,4 +1,4 @@
-from google.adk.agents.llm_agent import Agent
+from google.adk.agents import LlmAgent
 from src.agents.cards import TECH_SUPPORT_CARD
 from src.tools.mcp_server import check_network_outage, search_knowledge_base
 
@@ -7,9 +7,9 @@ def create_tech_support_agent():
     Creates a specialized Technical Support Agent using the TECH_SUPPORT_CARD metadata.
     Handles network, signal, and troubleshooting issues using MCP tools.
     """
-    tech_agent = Agent(
+    tech_agent = LlmAgent(
         name=TECH_SUPPORT_CARD.name,
-        model="gemini-1.5-flash",
+        model="gemini-2.0-flash",
         instruction=(
             f"You are the {TECH_SUPPORT_CARD.name}, a specialist in the {TECH_SUPPORT_CARD.domain} domain. "
             f"Your description: {TECH_SUPPORT_CARD.description} "

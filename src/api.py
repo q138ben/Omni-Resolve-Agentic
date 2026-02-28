@@ -3,8 +3,12 @@ from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 import os
+from dotenv import load_dotenv
 from src.agents.orchestrator import create_adk_brain
 from src.utils.gdpr import mask_pii
+
+# Load environment variables from .env
+load_dotenv()
 
 app = FastAPI(title="Omni-Resolve-Agentic API")
 
@@ -36,8 +40,8 @@ async def chat_endpoint(request: QueryRequest):
         safe_query = mask_pii(request.query)
         
         # Step 2: ADK Brain Orchestration
-        # This now triggers the real multi-agent engine in src/agents/orchestrator.py
-        response_text = brain.run(safe_query)
+        # This now triggers the real multi-agent engine asynchronously
+        response_text = await brain.run(safe_query)
         
         return {"response": response_text}
     except Exception as e:
