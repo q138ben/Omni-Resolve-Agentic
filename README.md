@@ -68,9 +68,9 @@ GOOGLE_GENAI_USE_VERTEXAI=TRUE
 
 ## 🧪 Testing
 
-The system includes a comprehensive test suite covering privacy, data connectors, and API endpoints.
+The system includes a comprehensive test suite covering privacy, data connectors, and API endpoints. Tests are automatically executed during the CI/CD process.
 
-To run the tests:
+To run the tests locally:
 ```bash
 pytest tests/
 ```
