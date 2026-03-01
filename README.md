@@ -27,6 +27,8 @@ The system follows a hierarchical multi-agent architecture:
 *   **Connectivity:** [Model Context Protocol (MCP)](https://modelcontextprotocol.io/)
 *   **Backend:** FastAPI & Uvicorn
 *   **Frontend:** Vanilla CSS & HTML (Modern Chat Interface)
+*   **Testing:** Pytest & HTTPX
+*   **Deployment:** Docker & Google Cloud Run
 *   **Data:** HuggingFace `bitext/Bitext-telco-llm-chatbot-training-dataset`
 
 ---
@@ -64,6 +66,45 @@ GOOGLE_GENAI_USE_VERTEXAI=TRUE
 
 ---
 
+## 🧪 Testing
+
+The system includes a comprehensive test suite covering privacy, data connectors, and API endpoints.
+
+To run the tests:
+```bash
+pytest tests/
+```
+
+Test coverage includes:
+- **GDPR Masking:** Ensures emails and phone numbers are correctly redacted.
+- **MCP Tools:** Verifies data retrieval from billing and network tools.
+- **API Integrity:** Validates endpoint availability and UI serving.
+
+---
+
+## ☁️ Deployment
+
+The application is containerized and ready for **Google Cloud Run**.
+
+### Local Build (Docker)
+```bash
+docker build -t omni-resolve-agentic .
+docker run -p 8080:8080 --env-file .env omni-resolve-agentic
+```
+
+### Deploy to Cloud Run
+```bash
+gcloud run deploy omni-resolve-agentic \
+  --source . \
+  --region us-central1 \
+  --allow-unauthenticated \
+  --set-env-vars GOOGLE_CLOUD_PROJECT=[YOUR_PROJECT_ID],GOOGLE_CLOUD_LOCATION=us-central1,GOOGLE_GENAI_USE_VERTEXAI=TRUE
+```
+
+**Live URL:** [https://omni-resolve-agentic-285608224001.us-central1.run.app](https://omni-resolve-agentic-285608224001.us-central1.run.app)
+
+---
+
 ## 📖 Usage
 
 ### Step 1: Download the Knowledge Base
@@ -72,17 +113,12 @@ Populate the local knowledge base with the telecom dataset:
 python src/utils/download_data.py
 ```
 
-### Step 2: Run the CLI Test
-Verify the orchestration and tools without the UI:
-```bash
-python src/main.py
-```
-
-### Step 3: Start the Web UI
-Launch the FastAPI server and open [http://localhost:8000](http://localhost:8000):
+### Step 2: Start the Web UI
+Launch the FastAPI server:
 ```bash
 python src/api.py
 ```
+Open [http://localhost:8000](http://localhost:8000) in your browser.
 
 ---
 
@@ -97,7 +133,9 @@ python src/api.py
 │   ├── templates/      # UI HTML files
 │   ├── api.py          # FastAPI Backend
 │   └── main.py         # CLI Entry point
-├── gemini.md           # Core Project Context
+├── tests/              # Pytest suite
+├── Dockerfile          # Container configuration
+├── ARCHITECTURE.md     # Technical deep dive
 ├── requirements.txt    # Python dependencies
 └── .env                # Environment secrets (GIT IGNORED)
 ```

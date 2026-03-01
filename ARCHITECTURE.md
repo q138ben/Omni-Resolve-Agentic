@@ -64,6 +64,26 @@ The system implements **"Privacy by Design"**:
 
 ---
 
+## 🧪 Verification & Testing
+
+A robust test suite ensures stability across releases:
+*   **Unit Tests (`tests/test_gdpr.py`):** Deterministic verification of PII redacting regex patterns.
+*   **Tool Tests (`tests/test_mcp_tools.py`):** Functional testing of mock database retrievals and outage logic.
+*   **Integration Tests (`tests/test_api.py`):** Validates the FastAPI routing and UI delivery.
+
+Tests are executed using `pytest` and utilize `httpx` for asynchronous endpoint testing.
+
+---
+
+## ☁️ Infrastructure & Deployment
+
+The system is designed for modern cloud-native environments:
+*   **Containerization:** A multi-stage `Dockerfile` optimizes the image size while ensuring all C-extensions for `numpy` and `scikit-learn` are correctly compiled.
+*   **Scalability:** Deployed on **Google Cloud Run**, providing an auto-scaling, serverless backend.
+*   **Environment Management:** Managed via `.env` files and GCP Secret Manager-compatible environment variables.
+
+---
+
 ## 📂 Codebase Map
 
 | File | Responsibility |
@@ -75,6 +95,8 @@ The system implements **"Privacy by Design"**:
 | `src/tools/mcp_server.py` | Implementation of all MCP Tools (Search, Billing, Network). |
 | `src/utils/gdpr.py` | PII masking logic for GDPR compliance. |
 | `src/utils/embed_data.py` | Utility to generate vector embeddings for the KB. |
+| `tests/` | Automated test suite. |
+| `Dockerfile` | Container build configuration. |
 | `data/` | CSV datasets and `.npy` vector storage (local only). |
 
 ---

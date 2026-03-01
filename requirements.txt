@@ -12,3 +12,6 @@ uvicorn
 huggingface_hub
 pandas
 scikit-learn
+pytest
+pytest-asyncio
+httpx
